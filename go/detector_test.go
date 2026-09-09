@@ -19,7 +19,7 @@ func TestDetectorDetect(t *testing.T) {
 	t.Setenv(downward.EnvNodeID, "node-id")
 	t.Setenv(downward.EnvNodeName, "worker-02")
 
-	res, err := (Detector{}).Detect(context.Background())
+	res, err := NewDetector().Detect(context.Background())
 	if err != nil {
 		t.Fatalf("Detect() error = %v", err)
 	}
@@ -45,7 +45,7 @@ func TestDetectorDetect(t *testing.T) {
 func TestDetectorDetectInvalidTaskSlot(t *testing.T) {
 	t.Setenv(downward.EnvTaskSlot, "invalid")
 
-	_, err := (Detector{}).Detect(context.Background())
+	_, err := NewDetector().Detect(context.Background())
 	if err == nil {
 		t.Fatal("Detect() error = nil, want error")
 	}
