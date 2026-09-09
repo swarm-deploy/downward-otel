@@ -5,7 +5,7 @@ OpenTelemetry resource detector for Docker Swarm metadata provided by [`swarm-de
 ```go
 res, err := resource.New(
     ctx,
-    resource.WithDetectors(downwardotel.Detector{}),
+    resource.WithDetectors(downwardotel.NewDetector()),
 )
 ```
 
@@ -31,7 +31,7 @@ func main() {
 
     res, err := resource.New(
         ctx,
-        resource.WithDetectors(downwardotel.Detector{}),
+        resource.WithDetectors(downwardotel.NewDetector()),
     )
     if err != nil {
         log.Fatal(err)
