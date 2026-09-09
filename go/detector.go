@@ -11,11 +11,15 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.40.0"
 )
 
-var _ resource.Detector = Detector{}
+var _ resource.Detector = (*Detector)(nil)
 
 type Detector struct{}
 
-func (Detector) Detect(_ context.Context) (*resource.Resource, error) {
+func NewDetector() *Detector {
+	return &Detector{}
+}
+
+func (*Detector) Detect(_ context.Context) (*resource.Resource, error) {
 	info, err := downward.Load()
 	if err != nil {
 		return nil, fmt.Errorf("load downward info: %w", err)
